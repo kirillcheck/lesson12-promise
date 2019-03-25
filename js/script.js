@@ -139,6 +139,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     let popup = document.querySelector('.popup-form'),
         div = document.createElement("div");
+    let divShowMessage = document.createElement("div");
     div.classList.add('status');
 
     statusMessage.classList.add('status');
@@ -152,7 +153,7 @@ window.addEventListener('DOMContentLoaded', function () {
         checkJson();
     });
 
-    
+
 
 
     function checkNumber() {
@@ -160,16 +161,17 @@ window.addEventListener('DOMContentLoaded', function () {
             input[i].addEventListener('input', (e) => {
                 if (/\D/.test(e.target.value)) {
                     e.target.value = '';
-                    popup.appendChild = (div);
-                    div.textContent = 'Можно вводить только цифры  ';
-
-                    setTimeout(function () {
-                        div.style.display = 'none';
-                    }, 2000);
+                    popup.appendChild(divShowMessage);
+                    divShowMessage.textContent = 'Можно вводить только цифры  ';
                 }
+                setTimeout(function () {
+                    divShowMessage.textContent = ' ';
+                }, 2000);
             });
         }
     }
+
+    checkNumber();
 
     function json(name) {
         event.preventDefault();
@@ -200,11 +202,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
     function checkJson() { // функция статуса отправки
         json(name) // данные ввода телефона
-            .then(() => { // что будет происходить
-                overlay.style.display = "block"; // показываем всплывающее модальное окно
-                document.body.style.overflow = "hidden";
-
-            }) // закрывающие скобки
             .then(() => { // что произойдет когда все сработает
                 console.log(' все работает! ');
                 popup.appendChild(div);
@@ -212,7 +209,7 @@ window.addEventListener('DOMContentLoaded', function () {
             })
             .catch(() => { // что произойдет если что то сломается
                 console.log(' Ошибка отправки! ');
-            }) // з
+            })
             .then(() => {
                 cleanInputs();
             });

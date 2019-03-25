@@ -1,1 +1,2 @@
-# lesson12-promise
+# practise 10
+# ES 6
